@@ -4,9 +4,11 @@ setwd("C:/Users/tikva/Desktop")
 titanic <- read.csv("titanic.csv", stringsAsFactors = FALSE)
 
 titanic$Title <- sub(".*,\\s*(.*?)\\..*", "\\1", titanic$Name)  
-#Muss man Master auch ersetzen?
+
 titanic$Title <- gsub("Mlle|Ms|Miss", "Miss", titanic$Title)
 titanic$Title <- gsub("Mme", "Mrs", titanic$Title)
+titanic$Title <- gsub("Master", "Mr", titanic$Title)
+
 titanic$Survived <- factor(titanic$Survived, levels = c(0, 1),
                            labels = c("No", "Yes"))
 titanic$Sex <- factor(titanic$Sex, levels = c("male", "female"))
@@ -28,10 +30,10 @@ titanic$Side <- ifelse(grepl("[0-9]", titanic$Cabin),
                        ifelse(as.numeric(gsub("[^0-9]", "", titanic$Cabin)) 
                               %% 2 == 0, "Backbord", "Steuerbord"), 
                        NA)
+titanic$Cabin <- ifelse(titanic$Cabin == "", NA, titanic$Cabin)
 
 
 titanic <- titanic[, !(names(titanic) %in% 
                          c("PassengerID", "Name", "Ticket", "Cabin"))]
 write.csv(titanic, "processed_titanic.csv", row.names = FALSE)
 
-#Fehlt noch Git-Teil
