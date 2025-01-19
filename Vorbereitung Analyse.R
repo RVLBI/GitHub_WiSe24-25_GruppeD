@@ -2,8 +2,10 @@
 
 titanic <- read.csv("titanic.csv", stringsAsFactors = FALSE)
 
+# Trennen der Anreden von den Namen: 
 titanic$Title <- sub(".*,\\s*(.*?)\\..*", "\\1", titanic$Name)  
 
+# Umbenennung der Anreden zur Übersichtlichkeit: 
 titanic$Title <- gsub("Mlle|Ms|Miss", "Miss", titanic$Title)
 titanic$Title <- gsub("Mme", "Mrs", titanic$Title)
 titanic$Title <- gsub("Master", "Mr", titanic$Title)
@@ -23,16 +25,16 @@ titanic$Embarked <- factor(titanic$Embarked, levels = c("C", "Q", "S"),
 # Kodierung von "PClass" als ordered-factor:
 titanic$Pclass <- factor(titanic$Pclass, ordered = TRUE, levels = c(3, 2, 1))
 
-
-impute_age <- function(title, age) {
-  if (is.na(age)) {
+# Altersangeben: nicht angegebene durch den Median, der Gruppe mit derselben Anrede ersetzen 
+impute_age <- function(title, age) {                                         # neue Funktion mit Parameter Titel (Anrede) und Alter erstellen
+  if (is.na(age)) {                                                          # Abrage, ob das Alter nicht angegeben ist
     median(titanic$Age[titanic$Title == title & !is.na(titanic$Age)],
-           na.rm = TRUE)
+           na.rm = TRUE)                                                     # wenn ja, den median, derer mir demselben Titel bestimmt, ohne NA zu berücksichtigen
   } else {
-    age
+    age                                                                      # sonst das Alter ´zurückgeben´
   }
 }
-titanic$Age <- mapply(impute_age, titanic$Title, titanic$Age)
+titanic$Age <- mapply(impute_age, titanic$Title, titanic$Age)                # die Funktion auf den Datensatz anwenden
 
 
 # Deck und Boardseite aus Cabin extrahieren
