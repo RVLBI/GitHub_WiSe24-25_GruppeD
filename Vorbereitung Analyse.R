@@ -27,7 +27,7 @@ titanic$Pclass <- factor(titanic$Pclass, ordered = TRUE, levels = c(3, 2, 1))
 
 # Altersangeben: nicht angegebene durch den Median, der Gruppe mit derselben Anrede ersetzen 
 impute_age <- function(title, age) {                                         # neue Funktion mit Parameter Titel (Anrede) und Alter erstellen
-  if (is.na(age)) {                                                          # Abrage, ob das Alter nicht angegeben ist
+  if (is.na(age)) {                                                          # Abfrage, ob das Alter nicht angegeben ist
     median(titanic$Age[titanic$Title == title & !is.na(titanic$Age)],
            na.rm = TRUE)                                                     # wenn ja, den median, derer mir demselben Titel bestimmt, ohne NA zu berücksichtigen
   } else {
