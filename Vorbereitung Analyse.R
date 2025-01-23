@@ -51,8 +51,9 @@ titanic$Cabin <- ifelse(titanic$Cabin == "", NA, titanic$Cabin)
 
 
 titanic <- titanic[, !(names(titanic) %in% 
-                         c("PassengerID", "Name", "Ticket", "Cabin"))]
+                         c("PassengerId", "Name", "Ticket", "Cabin"))]
 
 # Update für die csv-Datei
-write.csv(titanic, "processed_titanic.csv", row.names = FALSE)
+#setwd("C:/Users/vivie/OneDrive/Dokumente/GitHub/GitHub_WiSe25-25_GruppeD")  # setze Pfad
+write.csv(titanic, "processed_titanic.csv", row.names = FALSE)               # abspeichern
 
