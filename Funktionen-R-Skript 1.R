@@ -5,7 +5,17 @@
 
 
 # ii:
-
+# Funktion zur Erstellung von geeigneteten deskriptiven Statistiken für 
+# kategorielle (nominale/ordinale) Variablen und deren Ausgabe
+# Input: kath_var als die zu bearbeitende Variable
+# Output: entsprechende Statistiken
+des_stats_kath <- function(kath_var) {
+  modus <- mod(kath_var)            # berechnet den Modalwert der Variablen
+  modus
+  # Die `Höhe` muss noch in einen Vektor umgewandelt werden`
+  # barplot(kath_var)                 # erstellt einen Balkendiagramm der Variable
+  table(kath_var)                   # erstellt ein Häufigkeitentabelle der Variable 
+}
 
 
 # iii:
