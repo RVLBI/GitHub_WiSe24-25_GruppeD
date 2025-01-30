@@ -30,18 +30,53 @@ des_stats_kath <- function(kath_var) {
 # Input: metric_var   - Beobachtungsvektor der metrischen Variable
 #        dichotom_var - Beobachtungsvektor der dichotomen Variable
 # 
-# Output: ...
+# Output: entsprechende Statistiken für den Zusammenhang der Variablen (eine 
+#         benannte Liste und ein Plot)
 
 bivariate_stats_md <- function(metric_var, dichotom_var) {
   # Mittelwerte der metrischen Variable in den beiden Ausprägungen der dichotomen 
   # Variable:
   mittelwerte <- tapply(metric_var, dichotom_var, mean)
 
-  # P-Wert des t-Tests: Wahrscheinlichkeit, dass die beiden Mittelwerte nur aus 
-  # Zufall voneinander abweichen (wenn sie überhaupt voneinander abweichen)
-  p_Wert_t_test <- vollstaendiger_t_test(metric_var, dichotom_var)
-}
+  # Das gleiche für die Mediane:
+  mediane <- tapply(metric_var, dichotom_var, median)
 
+  # Das gleiche für die Varianzen:
+  varianzen <- tapply(metric_var, dichotom_var, var)
+
+  # Boxplots für die metrische Variable bei den beiden Ausprägungen der 
+  # dichotomen Variable: 
+  boxplot(metric_var ~ dichotom_var, 
+          main = "Boxplots je nach Ausprägung der dichotomen Variable")
+
+  # Weichen die beiden Varianzen signifikant voneinander ab?
+  p_wert_varianzen <- bartlett.test(metric_var ~ dichotom_var)$p.value
+  # p_wert_varianzen gibt die Wahrscheinlichkeit an, dass die gegebenenfalls 
+  # vorhandene Abweichung der Varianzen nur durch Zufall besteht
+  # (Bei > 0.05 keine signifikante Abweichung)
+
+  # Weichen die beiden Erwartungswerte signifikant voneinander ab?
+  if(p_wert_varianzen <= 0.05){ 
+    # Es gibt signifikante Anzeichen für unterschiedliche Varianzen:
+    p_wert_erwartungswerte <- t.test(metric_var ~ dichotom_var, var.equal = FALSE)
+  } else {
+    # Es gibt keine signifikanten Anzeichen für unterschiedliche Varianzen:
+    p_wert_erwartungswerte <- t.test(metric_var ~ dichotom_var, var.equal = TRUE)
+  }
+  # p_wert_erwartungswerte gibt die Wahrscheinlichkeit an, dass die gegebenenfalls 
+  # vorhandene Abweichung der Mittelwerte nur durch Zufall besteht
+  # (Bei > 0.05 keine signifikante Abweichung)
+
+  # Punktbiseriale Korrelation:
+  korrelation <- cor(metric_var, as.numeric(dichotom_var), method = "pearson")
+  # (Gibt Stärke und Richtung des Zusammenhangs an; Liegt innerhalb des Intervalls 
+  # [-1, 1])
+
+  return(list(Mittelwerte = mittelwerte, Varianzen = varianzen, Mediane = mediane,
+             P_Wert_Varianzen = p_wert_varianzen, 
+             P_Wert_Erwartungswerte = p_wert_erwartungswerte, 
+             Korrelation = korrelation))  
+}
 
 
 # v:
