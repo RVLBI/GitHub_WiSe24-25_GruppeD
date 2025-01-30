@@ -24,8 +24,8 @@ des_stats_kath <- function(kath_var) {
 
 # iv: 
 # bivariate_stats_md  - Funktion zur Berechnung und Ausgabe von geeigneten  
-#                      deskriptiven bivariaten Statistiken fuer den Zusammenhang  
-#                      zwischen einer metrischen und einer dichotomen Variable
+#                       deskriptiven bivariaten Statistiken für den Zusammenhang  
+#                       zwischen einer metrischen und einer dichotomen Variable
 #
 # Input: metric_var   - Beobachtungsvektor der metrischen Variable
 #        dichotom_var - Beobachtungsvektor der dichotomen Variable
@@ -33,7 +33,13 @@ des_stats_kath <- function(kath_var) {
 # Output: ...
 
 bivariate_stats_md <- function(metric_var, dichotom_var) {
-  # ...
+  # Mittelwerte der metrischen Variable in den beiden Ausprägungen der dichotomen 
+  # Variable:
+  mittelwerte <- tapply(metric_var, dichotom_var, mean)
+
+  # P-Wert des t-Tests: Wahrscheinlichkeit, dass die beiden Mittelwerte nur aus 
+  # Zufall voneinander abweichen (wenn sie überhaupt voneinander abweichen)
+  p_Wert_t_test <- vollstaendiger_t_test(metric_var, dichotom_var)
 }
 
 
