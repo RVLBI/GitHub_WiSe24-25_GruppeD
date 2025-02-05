@@ -7,14 +7,50 @@
 # ii:
 # Funktion zur Erstellung von geeigneteten deskriptiven Statistiken für 
 # kategorielle (nominale/ordinale) Variablen und deren Ausgabe
-# Input: kath_var als die zu bearbeitende Variable
+# Input: variable als die zu bearbeitende Variable
 # Output: entsprechende Statistiken
-des_stats_kath <- function(kath_var) {
-  modus <- mod(kath_var)            # berechnet den Modalwert der Variablen
-  modus
-  # Die `Höhe` muss noch in einen Vektor umgewandelt werden`
-  # barplot(kath_var)                 # erstellt einen Balkendiagramm der Variable
-  table(kath_var)                   # erstellt ein Häufigkeitentabelle der Variable 
+
+deskriptive_statistiken_kategorial <- function(variable) {
+  # Überprüfung, ob eine kategorielle Variable vorliegt, falls nicht Fehler ausgeben
+  if (!is.factor(variable) && !is.character(variable)) {
+    stop("Die Variable muss ein Faktor oder ein Character-Vektor sein.")
+  }
+  
+  # absolute Häufigkeiten berechnen
+  haeufigkeiten <- table(variable) 
+  # relative Häufigkeiten berechnen
+  relhaeufigkeiten <- prop.table(haeufigkeiten)
+  
+  # Modus bestimmen (Hilffunktion in Funktionen-R-Skript 2)
+  modus <- mod(variable)
+  
+  # Dominanz der häufigsten Kategorie
+  dominanz <- max(relhaeufigkeiten)
+  
+  # Anzahl der einzigartigen Werte
+  unique_values <- length(unique(variable))
+  
+  # Shannon-Entropie berechnen
+  Entropie <- -sum(relhaeufigkeiten * log2(relhaeufigkeiten), na.rm = TRUE)
+  
+  # Gini-Index berechen (Ungleichverteilungsmaß)
+  gini_index <- 1 - sum(relhaeufigkeiten^2)
+  
+  # Balkendiagramm zu den Häufigkeiten erstellen
+  Balkendiagramm_kathegorial(variable)
+  
+  # Ergebnisse ausgeben
+  list(
+    "Absolute Häufigkeiten" = haeufigkeiten,
+    "Relative Häufigkeiten" = relhaeufigkeiten,
+    "Modus" = modus,
+    "Dominanzindex"= dominanz,
+    "Anzahl einzigartiger Kategorien" = unique_values,
+    "Shannon-Entropie" = Entropie,
+    "Gini-Index" = gini_index
+    # Das Balkendiagramm wird in Plots erzeugt und muss deshalb hier nicht etxra
+    # angegben werden
+  )
 }
 
 
