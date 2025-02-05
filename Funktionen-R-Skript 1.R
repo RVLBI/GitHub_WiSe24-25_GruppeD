@@ -33,7 +33,7 @@ deskriptive_statistiken_kategorial <- function(variable) {
   # Shannon-Entropie berechnen
   Entropie <- -sum(relhaeufigkeiten * log2(relhaeufigkeiten), na.rm = TRUE)
   
-  # Gini-Index berechen (Ungleichverteilungsmaß)
+  # Gini-Index berechen (Ungleichverteilungsmaß (0 = gleichmäßig, 1 = maximal ungleich))
   gini_index <- 1 - sum(relhaeufigkeiten^2)
   
   # Balkendiagramm zu den Häufigkeiten erstellen
