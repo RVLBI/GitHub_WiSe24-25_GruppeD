@@ -94,24 +94,20 @@ bivariate_stats_md <- function(metric_var, dichotom_var) {
   # Weichen die beiden Erwartungswerte signifikant voneinander ab?
   if(p_wert_varianzen <= 0.05){ 
     # Es gibt signifikante Anzeichen für unterschiedliche Varianzen:
-    p_wert_erwartungswerte <- t.test(metric_var ~ dichotom_var, var.equal = FALSE)
+    p_wert_erwartungswerte <- t.test(metric_var ~ dichotom_var, var.equal = FALSE)$p.value
   } else {
     # Es gibt keine signifikanten Anzeichen für unterschiedliche Varianzen:
-    p_wert_erwartungswerte <- t.test(metric_var ~ dichotom_var, var.equal = TRUE)
+    p_wert_erwartungswerte <- t.test(metric_var ~ dichotom_var, var.equal = TRUE)$p.value
   }
   # p_wert_erwartungswerte gibt die Wahrscheinlichkeit an, dass die gegebenenfalls 
   # vorhandene Abweichung der Mittelwerte nur durch Zufall besteht
   # (Bei > 0.05 keine signifikante Abweichung)
 
-  # Punktbiseriale Korrelation:
-  korrelation <- cor(metric_var, as.numeric(dichotom_var), method = "pearson")
-  # (Gibt Stärke und Richtung des Zusammenhangs an; Liegt innerhalb des Intervalls 
-  # [-1, 1])
-
-  return(list(Mittelwerte = mittelwerte, Varianzen = varianzen, Mediane = mediane,
-             P_Wert_Varianzen = p_wert_varianzen, 
-             P_Wert_Erwartungswerte = p_wert_erwartungswerte, 
-             Korrelation = korrelation))  
+  return(list(Mittelwerte = mittelwerte, 
+              Varianzen = varianzen, 
+              Mediane = mediane,
+              P_Wert_Varianzen = p_wert_varianzen, 
+              P_Wert_Erwartungswerte = p_wert_erwartungswerte))  
 }
 
 
