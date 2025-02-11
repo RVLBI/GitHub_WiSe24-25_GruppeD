@@ -12,9 +12,10 @@
 
 deskriptive_statistiken_kategorial <- function(variable) {
   # Überprüfung, ob eine kategorielle Variable vorliegt, falls nicht Fehler ausgeben
-  if (!is.factor(variable) && !is.character(variable)) {
-    stop("Die Variable muss ein Faktor oder ein Character-Vektor sein.")
-  }
+  # Rausgenommen, um Pclass auch analysieren zu können
+  # if (!is.factor(variable) && !is.character(variable)) {
+  #   stop("Die Variable muss ein Faktor oder ein Character-Vektor sein.")
+  # }
   
   # absolute Häufigkeiten berechnen
   haeufigkeiten <- table(variable) 
