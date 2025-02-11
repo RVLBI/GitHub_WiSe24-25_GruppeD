@@ -62,7 +62,7 @@ deskriptive_statistiken_kategorial(titanic$Embarked)
 
 deskriptive_statistiken_kategorial(titanic$Deck)
 # Während der Schifffahrt war Deck C am meisten gebucht. Doch auch Deck B, D 
-# und E erfuhren großen Andrang. Zusammen genommen bieteten diese vier Decks
+# und E erfuhren großen Andrang. Zusammen genommen boten diese vier Decks
 # rund fünf Sechsteln der Gäste Unterschlupf, während nur ein Sechstel auf 
 # einem der anderen vier Decks übernachtete.
 
