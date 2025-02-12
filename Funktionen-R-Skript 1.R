@@ -31,8 +31,9 @@ deskriptive_statistiken_kategorial <- function(variable) {
   # Anzahl der einzigartigen Werte
   unique_values <- length(unique(variable))
   
-  # Shannon-Entropie berechnen
+  # Shannon-Entropie berechnen und normieren
   Entropie <- -sum(relhaeufigkeiten * log2(relhaeufigkeiten), na.rm = TRUE)
+  Entropie_normiert <- Entropie/log2(unique_values)
   
   # Gini-Index berechen (Ungleichverteilungsmaß (0 = gleichmäßig, 1 = maximal ungleich))
   gini_index <- 1 - sum(relhaeufigkeiten^2)
@@ -48,6 +49,7 @@ deskriptive_statistiken_kategorial <- function(variable) {
     "Dominanzindex"= dominanz,
     "Anzahl einzigartiger Kategorien" = unique_values,
     "Shannon-Entropie" = Entropie,
+    "normierte Shannon-Entropie" = Entropie_normiert,
     "Gini-Index" = gini_index
     # Das Balkendiagramm wird in Plots erzeugt und muss deshalb hier nicht etxra
     # angegben werden
