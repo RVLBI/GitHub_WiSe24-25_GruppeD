@@ -1,5 +1,5 @@
 # Aufgabe 2a)
-
+library(vcd) #fuer die Teilaufgabe iii)
 # i:
 
 
@@ -57,8 +57,88 @@ deskriptive_statistiken_kategorial <- function(variable) {
 }
 
 
-# iii:
+# iii: Analyse der Beziehung zwischen zwei kategorialen Variablen
 
+# analyse_kategorial - fuehrt eine detaillierte Analyse der 
+# Beziehung zwischen zwei kategorialen Variablen durch
+# und berechnet geeignete statistische Koeffizienten, 
+# abhaengig von den Eigenschaften der Variablen.
+
+# Input:
+# var1: Name der ersten kategorialen Variablen als Zeichenkette.
+# var2: Name der zweiten kategorialen Variablen als Zeichenkette.
+# daten: Ein DataFrame, der die Daten enthält, die analysiert werden sollen.
+
+# Output:
+# Es wird eine Reihe von statistischen Tests
+# und Koeffizienten angezeigt, wie der Chi-Quadrat-Test,
+# Cramers V, Phi-Koeffizient, Yules Q, sowie Pearson Kontingenzkoeffizient,
+# wenn dies zutrifft.
+# Abhaengig von der Art der Variablen wird der geeignete Koeffizient ausgewaehlt.
+analyse_kategorial <- function(var1, var2, daten) {
+  print(paste("Analyse der Beziehung zwischen", var1, "und", var2))
+  
+  tabelle <- table(daten[[var1]], daten[[var2]])
+  print("Kreuztabelle:")
+  print(tabelle)  # Kreuztabelle erstellen
+  
+  zeilen <- nrow(tabelle)
+  spalten <- ncol(tabelle)  # Dimensionen der Tabelle pruefen
+  
+ 
+  print("Chi-Quadrat-Test:")
+  chi_test <- chisq.test(tabelle)
+  print(chi_test) # Chi-Quadrat-Test fuer alle kategorialen Variablen
+  
+ 
+  if (zeilen > 2 | spalten > 2) {
+    print("Cramers V:")
+    
+    print(assocstats(tabelle)$cramer) # Cramers V und Kontingenzkoeffizient 
+                                       # (falls Tabelle groesser als 2x2 ist)
+    
+    print("Pearsons Kontingenzkoeffizient:")
+    chi_sq <- chi_test$statistic
+    n <- sum(tabelle)
+    C <- sqrt(chi_sq / (chi_sq + n))
+    print(C)
+  }
+  
+  
+  if (zeilen == 2 & spalten == 2) {
+    print("Phi-Koeffizient:")
+    phi <- sqrt(chi_test$statistic / sum(tabelle))
+    print(phi)
+    
+    print("Yules Q-Koeffizient:")
+    Q <- (tabelle[1,1] * tabelle[2,2] - tabelle[1,2] * tabelle[2,1]) /
+      (tabelle[1,1] * tabelle[2,2] + tabelle[1,2] * tabelle[2,1])
+    print(Q)
+  } # Falls die Tabelle 2×2 ist, Phi-Koeffizient und Yules Q berechnen
+  
+ 
+  if (is.ordered(daten[[var1]]) & is.ordered(daten[[var2]])) {
+    print("Kendalls Tau-Koeffizient:")
+    var1_numeric <- as.numeric(daten[[var1]])
+    var2_numeric <- as.numeric(daten[[var2]])
+    print(cor(var1_numeric, var2_numeric, method = "kendall"))
+    
+    print("Kruskals Gamma-Koeffizient:")
+    print(GKgamma(tabelle)) # Pruefen, ob die Variablen ordinal sind
+  }
+  
+  
+  if (any(tabelle < 5)) {
+    print("Fishers Exakter Test:")
+    fisher_test <- fisher.test(tabelle)
+    print(fisher_test)# Falls es Zellen mit weniger als 5 
+                      # Beobachtungen gibt, Fishers Exakter Test
+  }
+}
+
+
+analyse_kategorial("Sex", "Survived", titanic)
+analyse_kategorial("Pclass", "Survived", titanic)
 
 
 # iv: 
