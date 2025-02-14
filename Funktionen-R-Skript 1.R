@@ -135,11 +135,6 @@ analyse_kategorial <- function(var1, var2, daten) {
   }
 }
 
-
-analyse_kategorial("Sex", "Survived", titanic)
-analyse_kategorial("Pclass", "Survived", titanic)
-
-
 # iv: 
 # bivariate_stats_md  - Funktion zur Berechnung und Ausgabe von geeigneten  
 #                       deskriptiven bivariaten Statistiken für den Zusammenhang  
