@@ -194,5 +194,39 @@ bivariate_stats_md <- function(metric_var, dichotom_var) {
 
 
 # v:
+# visualize_kat - Funktion zur Visualisierung von drei oder vier  
+#                         kategorialen Variablen in einem Balkendiagramm
+#
+# Input: data - Datensatz (Dataframe)
+#        var1 - Name der ersten kategorialen Variable 
+#        var2 - Name der zweiten kategorialen Variable 
+#        var3 - Name der dritten kategorialen Variable
+#        var4 - (Optional) Name der vierten kategorialen Variable 
+#
+# Output: Ein Balkendiagramm mit Gruppierung und Facettierung
+
+visualize_kat <- function(data, var1, var2, var3, var4 = NULL){
+ if (!is.null(var4)) {
+ # Vier kategoriale Variablen: Mehrere Facetten
+    par(mfrow = c(1, length(unique(data[[var4]]))))  # Unterteilung des Plots
+    for (level in unique(data[[var4]])) {
+      subset_data <- data[data[[var4]] == level, ]
+      counts <- table(subset_data[[var1]], subset_data[[var2]], subset_data[[var3]])
+      barplot(counts, beside = TRUE, legend = TRUE, main = paste(var4, "=", level))
+    }
+    par(mfrow = c(1,1))  # Standardansicht wiederherstellen
+  } 
+  else {
+    # Drei kategoriale Variablen: Gruppenbalkendiagramm
+    counts <- table(data[[var1]], data[[var2]], data[[var3]])
+    barplot(counts, beside = TRUE, legend = TRUE, 
+            main = paste("Balkendiagramm von", var1, "nach", var2, "und", var3))
+  }
+}
+#Beispiel zum Titanic Daten
+
+titanic_data <- read.csv("titanic.csv")
+visualize_kat(titanic_data, "Pclass", "Sex", "Survived")
+
 
 
