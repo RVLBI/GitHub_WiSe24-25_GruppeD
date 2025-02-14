@@ -206,11 +206,15 @@ bivariate_stats_md <- function(metric_var, dichotom_var) {
 # Output: Ein Balkendiagramm mit Gruppierung und Facettierung
 
 visualize_kat <- function(data, var1, var2, var3, var4 = NULL){
+  # Überprüfen, ob eine vierte kategoriale Variable angegeben wurde
  if (!is.null(var4)) {
  # Vier kategoriale Variablen: Mehrere Facetten
+  # Falls eine vierte Variable existiert, wird für jede ihrer Ausprägungen ein separates Diagramm erstellt
     par(mfrow = c(1, length(unique(data[[var4]]))))  # Unterteilung des Plots
+      # Iteration über jede Ausprägung der vierten Variable
     for (level in unique(data[[var4]])) {
       subset_data <- data[data[[var4]] == level, ]
+      # Erstellen einer Häufigkeitstabelle für die drei verbleibenden kategorialen Variablen
       counts <- table(subset_data[[var1]], subset_data[[var2]], subset_data[[var3]])
       barplot(counts, beside = TRUE, legend = TRUE, main = paste(var4, "=", level))
     }
@@ -226,6 +230,7 @@ visualize_kat <- function(data, var1, var2, var3, var4 = NULL){
 #Beispiel zum Titanic Daten
 
 titanic_data <- read.csv("titanic.csv")
+#"Pclass", "Sex" und "Survived" als Variablen var1, var2 und var3 eingeben
 visualize_kat(titanic_data, "Pclass", "Sex", "Survived")
 
 
