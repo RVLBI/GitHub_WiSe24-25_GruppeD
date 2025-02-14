@@ -48,7 +48,6 @@ deskriptive_statistiken_kategorial <- function(variable) {
     "Modus" = modus,
     "Dominanzindex"= dominanz,
     "Anzahl einzigartiger Kategorien" = unique_values,
-    "Shannon-Entropie" = Entropie,
     "normierte Shannon-Entropie" = Entropie_normiert,
     "Gini-Index" = gini_index
     # Das Balkendiagramm wird in Plots erzeugt und muss deshalb hier nicht etxra
