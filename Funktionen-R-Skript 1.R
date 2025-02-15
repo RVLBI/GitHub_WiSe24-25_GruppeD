@@ -5,10 +5,18 @@ library(vcd) #fuer die Teilaufgabe iii)
 
 
 # ii:
+# deskriptive_statistiken_kategorial: 
 # Funktion zur Erstellung von geeigneteten deskriptiven Statistiken für 
 # kategorielle (nominale/ordinale) Variablen und deren Ausgabe
-# Input: variable als die zu bearbeitende Variable
-# Output: entsprechende Statistiken
+
+# Input: 
+# variable - eine Variable des Datensatzes als die zu bearbeitende Variable
+
+# Output: 
+# entsprechende Statistiken für die Beschreibung einer kateogriellen Variable
+# genauer, absolute und relative Häufigkeiten, den Modus, den Dominanzindex, 
+# die Anzahl der unterschiedlichen Werte der Variablen, die Entropie, den Gini-
+# Index, sowie ein Balkendiagramm des zu analysierenden Merkmals.
 
 deskriptive_statistiken_kategorial <- function(variable) {
   # Überprüfung, ob eine kategorielle Variable vorliegt, falls nicht Fehler ausgeben
@@ -50,7 +58,7 @@ deskriptive_statistiken_kategorial <- function(variable) {
     "Anzahl einzigartiger Kategorien" = unique_values,
     "normierte Shannon-Entropie" = Entropie_normiert,
     "Gini-Index" = gini_index
-    # Das Balkendiagramm wird in Plots erzeugt und muss deshalb hier nicht etxra
+    # Das Balkendiagramm wird in Plots erzeugt und muss deshalb hier nicht extra
     # angegben werden
   )
 }
