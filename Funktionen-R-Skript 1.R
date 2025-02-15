@@ -36,6 +36,19 @@ deskript_stat_metr <- function(variable){
   
   #wölbung
   woelbung <- woelbungfkt(variable, qd)
+  
+  return(list(Arith_Mittel = arith_mittel,
+              Median = median,
+              Minimum = minimum,
+              Maximum = maximum,
+              Quartil_25 = quartil_25,
+              Quartil_75 = quartil_75,
+              QD = qd,
+              Spannweite = spannweite,
+              Stand_Abw = stand_abw,
+              Varianz = varianz,
+              Schiefe = schiefe,
+              Woelbung = woelbung))
 }
 
 
