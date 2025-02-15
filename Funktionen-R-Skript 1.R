@@ -38,6 +38,7 @@ deskript_stat_metr <- function(variable){
   woelbung <- woelbungfkt(variable, qd)
   
   return(list(Arith_Mittel = arith_mittel,
+              Modus = modus,
               Median = median,
               Minimum = minimum,
               Maximum = maximum,
