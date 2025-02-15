@@ -20,32 +20,10 @@ source("Funktionen-R-Skript 2.R")
 # Side     - dichotom
 
 # Um den Datensatz zu analysieren, werden die von uns erstellten Funktionen auf
-# die jeweils passenden Variablen angewendet. Zunächst untersuchen wir, welche
-# metrischen Variablen Einfluss auf die Überlebensrate ausgeübt haben könnten:
+# die jeweils passenden Variablen angewendet. Dazu gehen wir nach der Reihenfolge
+# der Funktionen vor und untersuchen daher zuerst die metrischen Variablen:
 
-bivariate_stats_md(titanic$Fare, titanic$Survived)
-# Man sieht, dass es einen signifikanten Unterschied im erwarteten Ticketpreis
-# zwischen denen, die überlebt haben, und denen, die nicht überlebt haben, gibt.
-# Der Ticketpreis von denen, die überlebt haben, war durchschnittlich mehr als
-# doppelt so teuer wie von den Verstorbenen. Es besteht allerdings auch eine 
-# deutlich größere Varianz in den Ticketpreisen der Überlebenden, es gab also,
-# wie man gut dem Boxplot entnehmen kann, auch viele Überlebende mit günstigen
-# Boardkarten. Dennoch kann gefolgert werden, dass ein teureres Ticket eine 
-# höhere Überlebenschance erkauft hat. 
-
-bivariate_stats_md(titanic$Age, titanic$Survived)
-# Vom Alter aus ist allerdings kein signifikanter Einfluss auf die mittleren
-# Überlebensraten festzustellen. Zwar ist die Varianz höher bei den Überlebenden,
-# ein bahnbrechender Unterschied ist aber nicht festzustellen. 
-
-# Wenn man nun Unterschiede zwischen den Geschlechtern untersucht, fällt auf:
-bivariate_stats_md(titanic$Fare, titanic$Sex) 
-# dass Frauen durchschnittlich deutlich mehr für ein Ticket gezahlt haben als 
-# Männer und 
-bivariate_stats_md(titanic$Parch, titanic$Sex) 
-# mit mehr Eltern und Kindern gereist sind als Männer. 
-
-
+#...
 
 # Nun untersuchen wir einige kategoriale Merkmale: 
 
@@ -66,6 +44,45 @@ deskriptive_statistiken_kategorial(titanic$Deck)
 # rund fünf Sechsteln der Gäste Unterschlupf, während nur ein Sechstel auf 
 # einem der anderen vier Decks übernachtete.
 
+deskriptive_statistiken_kategorial(titanic$Pclass)
+# Außerdem war die am meisten genutzte Klasse scheinbar die dritte - sie
+# kommt auf mehr Buchende als die ersten beiden Klassen zusammen. 
 
+# Wir gehen nun über zu den Zusammenhängen zwischen den verschiedenen Variablen.
+# Hier beginnen wir mit Einflüssen von kategorialen Variablen auf andere
+# kategoriale Variablen. Dabei ist zu beachten, dass dichotome Variablen auch 
+# ein Spezialfall von kategorialen Variablen sind:
 
 #...
+
+# Als nächstes gehen wir dem Zusammenspiel von metrischen und dichotomen
+# Variablen auf den Grund:
+
+bivariate_stats_md(titanic$Fare, titanic$Survived)
+# Man sieht, dass es einen signifikanten Unterschied im erwarteten Ticketpreis
+# zwischen denen, die überlebt haben, und denen, die nicht überlebt haben, gibt.
+# Der Ticketpreis von denen, die überlebt haben, war durchschnittlich mehr als
+# doppelt so teuer wie von den Verstorbenen. Es besteht allerdings auch eine 
+# deutlich größere Varianz in den Ticketpreisen der Überlebenden, es gab also,
+# wie man gut dem Boxplot entnehmen kann, auch viele Überlebende mit günstigen
+# Boardkarten. Dennoch kann gefolgert werden, dass ein teureres Ticket eine 
+# höhere Überlebenschance erkauft hat. 
+
+bivariate_stats_md(titanic$Age, titanic$Survived)
+# Vom Alter aus ist allerdings kein signifikanter Einfluss auf die mittleren
+# Überlebensraten festzustellen. Zwar ist die Varianz höher bei den Überlebenden,
+# ein bahnbrechender Unterschied liegt aber nicht vor. 
+
+# Wenn man nun Unterschiede zwischen den Geschlechtern untersucht, fällt auf:
+bivariate_stats_md(titanic$Fare, titanic$Sex) 
+# dass Frauen durchschnittlich deutlich mehr für ein Ticket gezahlt haben als 
+# Männer und 
+bivariate_stats_md(titanic$Parch, titanic$Sex) 
+# mit mehr Eltern und Kindern gereist sind als Männer. 
+
+# Zuletzt analysieren wir den Einfluss, den drei oder vier kategoriale Variablen 
+# aufeinander haben:
+
+#...
+
+# Zusammenfassend kann also gesagt werden, dass...
