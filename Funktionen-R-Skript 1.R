@@ -1,6 +1,55 @@
 # Aufgabe 2a)
 library(vcd) #fuer die Teilaufgabe iii)
 # i:
+deskript_stat_metr <- function(variable){
+  
+  # überprüfen, ob Variable metrisch ist
+  if (!is.numeric(variable)) {stop("Die Variable muss metrisch sein.")}
+  
+  # Arithmetisches Mittel bestimmen:
+  arith_mittel <- mean(variable)
+  
+  # Modus bestimmen: (Hilffunktion in Funktionen-R-Skript 2)
+  modus <- mod(variable)
+  
+  # Quartile bestimmen:
+  median <- median(variable, na.rm = T)
+  minimum <- min(variable, na.rm = T)
+  maximum <- max(variable, na.rm = T)
+  quartil_25 <- quantile(variable, probs = 0.25, names = F, na.rm = T)
+  quartil_75 <- quantile(variable, probs = 0.75, names = F, na.rm = T)
+  
+  # Quantilsdifferenz bestimmen:
+  qd <- IQR(variable, na.rm = T)
+  
+  # Spannweite bestimmen:
+  spannweite <- maximum - minimum
+  
+  # Standardabweichung bestimmen:
+  stand_abw <- sd(variable, na.rm = T)
+  
+  # Varianz bestimmen:
+  varianz <- var(variable, na.rm = T)
+  
+  # Schiefe bestimmen (mit Fkt aus den Hilfsfktnen):
+  schiefe <- schiefefkt(arith_mittel, median, stand_abw)
+  
+  #wölbung
+  woelbung <- woelbungfkt(variable, qd)
+  
+  return(list(Arith_Mittel = arith_mittel,
+              Median = median,
+              Minimum = minimum,
+              Maximum = maximum,
+              Quartil_25 = quartil_25,
+              Quartil_75 = quartil_75,
+              QD = qd,
+              Spannweite = spannweite,
+              Stand_Abw = stand_abw,
+              Varianz = varianz,
+              Schiefe = schiefe,
+              Woelbung = woelbung))
+}
 
 
 
