@@ -206,6 +206,7 @@ analyse_kategorial <- function(var1, var2) {
     print("Kendalls Tau-Koeffizient:") # Pruefen, ob die Variablen ordinal sind
     var1_numeric <- as.numeric(var1)
     var2_numeric <- as.numeric(var2)
+
     print(cor(var1_numeric, var2_numeric, method = "kendall"))
     
     print("Kruskals Gamma-Koeffizient:")
