@@ -1,5 +1,8 @@
 # Aufgabe 2a)
 library(vcd) #fuer die Teilaufgabe iii)
+
+# source("Funktionen-R-Skript 2.R")
+
 # i:
 deskript_stat_metr <- function(variable){
   
@@ -70,10 +73,9 @@ deskript_stat_metr <- function(variable){
 
 deskriptive_statistiken_kategorial <- function(variable) {
   # Überprüfung, ob eine kategorielle Variable vorliegt, falls nicht Fehler ausgeben
-  # Rausgenommen, um Pclass auch analysieren zu können
-  # if (!is.factor(variable) && !is.character(variable)) {
-  #   stop("Die Variable muss ein Faktor oder ein Character-Vektor sein.")
-  # }
+  if (is.numeric(variable)) {
+     stop("Die Variable muss kategoriell sein.")
+  }
   
   # absolute Häufigkeiten berechnen
   haeufigkeiten <- table(variable) 
