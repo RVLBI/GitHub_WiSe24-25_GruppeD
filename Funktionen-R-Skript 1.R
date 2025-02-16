@@ -34,6 +34,9 @@ deskript_stat_metr <- function(variable){
   # Varianz bestimmen:
   varianz <- var(variable, na.rm = T)
   
+  # Variationskoeffizient bestimmen:
+  vark <- stand_abw/arith_mittel
+  
   # Schiefe bestimmen (mit Fkt aus den Hilfsfktnen):
   schiefe <- schiefefkt(arith_mittel, median, stand_abw)
   
@@ -51,6 +54,7 @@ deskript_stat_metr <- function(variable){
               Spannweite = spannweite,
               Stand_Abw = stand_abw,
               Varianz = varianz,
+              VarKoeffizient = vark,
               Schiefe = schiefe,
               Woelbung = woelbung))
 }
