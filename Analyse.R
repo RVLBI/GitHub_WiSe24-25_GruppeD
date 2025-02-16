@@ -48,6 +48,21 @@ deskriptive_statistiken_kategorial(titanic$Pclass)
 # Außerdem war die am meisten genutzte Klasse scheinbar die dritte - sie
 # kommt auf mehr Buchende als die ersten beiden Klassen zusammen. 
 
+-------------------------------------------------------------------------------
+# Hier werden noch die dichotomen Merkmale untersucht, welche eine besonders
+# Form von kategoriellen Merkmalen darstellen:
+
+deskriptive_statistiken_kategorial(titanic$Survived)
+# Die Analyse zeigt, dass Menschen an Bord der Titanic mehrheitlich (ca. 60%) 
+# nicht überlebt haben. Dennoch ist die normierte Entropie nahe 1, was zeigt, 
+# dass die Verteilung nah an einer Gleichverteilung liegt. 
+
+deskriptive_statistiken_kategorial(titanic$Sex)
+#
+# 
+
+-------------------------------------------------------------------------------
+
 # Wir gehen nun über zu den Zusammenhängen zwischen den verschiedenen Variablen.
 # Hier beginnen wir mit Einflüssen von kategorialen Variablen auf andere
 # kategoriale Variablen. Dabei ist zu beachten, dass dichotome Variablen auch 
