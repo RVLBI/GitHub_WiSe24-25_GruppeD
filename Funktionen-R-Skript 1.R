@@ -4,6 +4,20 @@ library(vcd) #fuer die Teilaufgabe iii)
 # source("Funktionen-R-Skript 2.R")
 
 # i:
+# deskript_stat_metr: 
+# Funktion zur Erstellung von geeigneteten deskriptiven Statistiken für 
+# metrische Variablen und deren Ausgabe
+
+# Input: 
+# variable - eine Variable des Datensatzes als die zu bearbeitende Variable
+
+# Output: 
+# entsprechende Statistiken für die Beschreibung einer metrischen Variable
+# Genauer: Arithmetisches Mittel, Modus, Median und andere Quantile, Maximum und
+# Minimum, Quantilsdifferenz, Spannweite, Standardabweichung, Varianz,
+# Varianzkoeffizient, Schiefe und Woelbung.
+# Gibt einen Boxplot am Ende aus.
+
 deskript_stat_metr <- function(variable){
   
   # überprüfen, ob Variable metrisch ist
@@ -40,8 +54,13 @@ deskript_stat_metr <- function(variable){
   # Schiefe bestimmen (mit Fkt aus den Hilfsfktnen):
   schiefe <- schiefefkt(arith_mittel, median, stand_abw)
   
-  #wölbung
+  #Wölbung bestimmen:
   woelbung <- woelbungfkt(variable, qd)
+  
+  # Boxplot ausgeben:
+  name <- deparse(substitute(variable)) # bestimmen Namen der Variable
+  name <- tail(strsplit(name, "\\$")[[1]], 1) # entferne titanic$
+  boxplot(variable, xlab = name)
   
   return(list(Arith_Mittel = arith_mittel,
               Modus = modus,
@@ -143,15 +162,14 @@ ist_2x2 <- function(tabelle) {
 # wenn dies zutrifft.
 # Abhaengig von der Art der Variablen wird der geeignete Koeffizient ausgewaehlt.
 
-analyse_kategorial <- function(var1, var2, daten) {
-  print(paste("Analyse der Beziehung zwischen", var1, "und", var2))
+analyse_kategorial <- function(var1, var2) {
   
-  tabelle <- table(daten[[var1]], daten[[var2]])
+  tabelle <- table(var1, var2)
   print("Kreuztabelle:") # Kreuztabelle erstellen
   print(tabelle)
   
   print("Chi-Quadrat-Test:")
-  chi_test <- chisq.test(tabelle) # Chi-Quadrat-Test fuer alle kategorialen Variablen
+  chi_test <- chisq.test(tabelle, simulate.p.value = TRUE) # Chi-Quadrat-Test fuer alle kategorialen Variablen
   print(chi_test)
   
   max_row <- apply(tabelle, 1, max)
@@ -184,10 +202,11 @@ analyse_kategorial <- function(var1, var2, daten) {
     print(C)
   }
   
-  if (is.ordered(daten[[var1]]) & is.ordered(daten[[var2]])) {
+  if (is.ordered(var1) & is.ordered(var2)) {
     print("Kendalls Tau-Koeffizient:") # Pruefen, ob die Variablen ordinal sind
-    var1_numeric <- as.numeric(daten[[var1]])
-    var2_numeric <- as.numeric(daten[[var2]])
+    var1_numeric <- as.numeric(var1)
+    var2_numeric <- as.numeric(var2)
+
     print(cor(var1_numeric, var2_numeric, method = "kendall"))
     
     print("Kruskals Gamma-Koeffizient:")
@@ -196,6 +215,7 @@ analyse_kategorial <- function(var1, var2, daten) {
   
   if (any(tabelle < 5)) {
     print("Fishers Exakter Test:")
+    tabelle[tabelle > 5] <- 0 # setze alle Einträge, die >5 sind, auf 0
     fisher_test <- fisher.test(tabelle)
     print(fisher_test) # Falls es Zellen mit weniger als 5 
                       # Beobachtungen gibt, Fishers Exakter Test
@@ -269,8 +289,8 @@ bivariate_stats_md <- function(metric_var, dichotom_var) {
 
 visualize_kat <- function(data, var1, var2, var3, var4 = NULL){
   # Überprüfen, ob eine vierte kategoriale Variable angegeben wurde
- if (!is.null(var4)) {
- # Vier kategoriale Variablen: Mehrere Facetten
+  if (!is.null(var4)) {
+  # Vier kategoriale Variablen: Mehrere Facetten
   # Falls eine vierte Variable existiert, wird für jede ihrer Ausprägungen ein separates Diagramm erstellt
     par(mfrow = c(1, length(unique(data[[var4]]))))  # Unterteilung des Plots
       # Iteration über jede Ausprägung der vierten Variable
@@ -281,6 +301,7 @@ visualize_kat <- function(data, var1, var2, var3, var4 = NULL){
       barplot(counts, beside = TRUE, legend = TRUE, main = paste(var4, "=", level))
     }
     par(mfrow = c(1,1))  # Standardansicht wiederherstellen
+    counts_matrix <- apply(counts, c(1, 2), sum)  # summiere die 3. Dimension
   } 
   else {
     # Drei kategoriale Variablen: Gruppenbalkendiagramm
@@ -291,9 +312,8 @@ visualize_kat <- function(data, var1, var2, var3, var4 = NULL){
 }
 #Beispiel zum Titanic Daten
 
-titanic_data <- read.csv("titanic.csv")
+#titanic_data <- read.csv("titanic.csv")
 #"Pclass", "Sex" und "Survived" als Variablen var1, var2 und var3 eingeben
-visualize_kat(titanic_data, "Pclass", "Sex", "Survived")
-
+#visualize_kat(titanic_data, "Pclass", "Sex", "Survived")
 
 
