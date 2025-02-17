@@ -32,15 +32,32 @@ deskript_stat_metr(titanic$Age)
 # leicht rechtsschief ist. Die Verteilung ist leicht leptokurtisch. 
 
 deskript_stat_metr(titanic$SibSp)
-#...
+# Beim Untersuchen der Ehefrauen- und Geschwisteranzahl fällt auf, dass trotz 
+# des Durchschnittes, der bei 0.523 liegt, und der Spannweite, die von 0 bis 8
+# reicht, der Modus und der Median bei 0 liegen. Dies weist zusammen mit dem 
+# Schiefe-Koeffizienten auf eine Rechtsschiefe der Verteilung hin. Des Weiteren 
+# ist die Verteilung steilgipflig. Es lässt sich also insgesamt schließen, dass 
+# die allermeisten ohne viele Geschwister oder Ehefrauen angereist sind und 
+# mindestens drei Viertel der Passagiere höchstens eine Person von beiden 
+# Gruppen zusammen mitnahmen. Es gab aber auch ein paar Ausreißer nach oben. 
 
 deskript_stat_metr(titanic$Parch)
-#...
+# Die Anzahl an Eltern und Kindern zeichnet ein sehr ähnliches Bild zu dem 
+# der Geschwister und Ehefrauen, nur mit noch etwas extremerer Tendenz zu 
+# wenigen Mitreisenden. So liegt hier zum Beispiel selbst das 0.75-Quantil
+# bei 0 und die maximale Anzahl an Eltern und Kindern an Bord liegt bei 6.
 
 deskript_stat_metr(titanic$Fare)
-#...
+# Der Ticketpreis als letzte zu untersuchende metrische Variable lag zwischen 
+# 0 und 512.33 (wahrscheinlich Pfund), allerdings lagen die meisten Preise 
+# im unteren Bereich dieser Spanne, was zum Beispiel der Durchschnitt von 32.20 
+# und der Median von 14.45 zeigen. Ebenfalls interessant ist, dass sogar das 
+# 75 Prozent Quantil mit 31 knapp unter dem arithmetischen Mittel liegt, was
+# auf große Ausreißer nach oben deutet. Auch diese Verteilung ist wieder 
+# rechtsschief und etwas leptokurtisch.
 
--------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+
 # Nun untersuchen wir die kategorialen Merkmale: 
 
 deskriptive_statistiken_kategorial(titanic$Title)
@@ -78,7 +95,7 @@ deskriptive_statistiken_kategorial(titanic$Sex)
 # und mit einem Gini-Index nahe 0.5 sind die Geschlechter weder besonders 
 # gleichmäßig noch besonders ungelichmäßig verteilt. 
 
--------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 # Wir gehen nun über zu den Zusammenhängen zwischen den verschiedenen Variablen.
 # Hier beginnen wir mit Einflüssen von kategorialen Variablen auf andere
@@ -155,6 +172,8 @@ bivariate_stats_md(titanic$Fare, titanic$Sex)
 # Männer und 
 bivariate_stats_md(titanic$Parch, titanic$Sex) 
 # mit mehr Eltern und Kindern gereist sind als Männer. 
+
+# -----------------------------------------------------------------------------
 
 # Zuletzt analysieren wir den Einfluss, den drei oder vier kategoriale Variablen 
 # aufeinander haben:
