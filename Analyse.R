@@ -23,9 +23,25 @@ source("Funktionen-R-Skript 2.R")
 # die jeweils passenden Variablen angewendet. Dazu gehen wir nach der Reihenfolge
 # der Funktionen vor und untersuchen daher zuerst die metrischen Variablen:
 
+deskript_stat_metr(titanic$Age)
+# Zunächst wird das Alter untersucht, wobei aufällt, dass die Maße zum messen des
+# Mittel mit 28, 28 und 29.23308 liegen trotz einer Spannweite von fast 80 nah 
+# beinander. Die Standartabweichung beträgt ungefähr 13 und die Quartilsdiffernz 
+# mit den Quantilen 35 und 21 bei 14. Wegen der Schiefe nahe 0 lässt sich sagen, 
+# dass die Verteilung des Alters nah an einer Normalverteilung liegt, jedoch 
+# leicht rechtsschief ist. Die Verteilung ist leicht leptokurtisch. 
+
+deskript_stat_metr(titanic$SibSp)
 #...
 
-# Nun untersuchen wir einige kategoriale Merkmale: 
+deskript_stat_metr(titanic$Parch)
+#...
+
+deskript_stat_metr(titanic$Fare)
+#...
+
+-------------------------------------------------------------------------------
+# Nun untersuchen wir die kategorialen Merkmale: 
 
 deskriptive_statistiken_kategorial(titanic$Title)
 # So sieht man zum Beispiel, dass die meisten mit "Mr" anzusprechen waren, 
@@ -48,8 +64,7 @@ deskriptive_statistiken_kategorial(titanic$Pclass)
 # Außerdem war die am meisten genutzte Klasse scheinbar die dritte - sie
 # kommt auf mehr Buchende als die ersten beiden Klassen zusammen. 
 
--------------------------------------------------------------------------------
-# Hier werden noch die dichotomen Merkmale untersucht, welche eine besonders
+# Hier werden noch die dichotomen Merkmale untersucht, welche eine besondere
 # Form von kategoriellen Merkmalen darstellen:
 
 deskriptive_statistiken_kategorial(titanic$Survived)
@@ -58,8 +73,10 @@ deskriptive_statistiken_kategorial(titanic$Survived)
 # dass die Verteilung nah an einer Gleichverteilung liegt. 
 
 deskriptive_statistiken_kategorial(titanic$Sex)
-#
-# 
+# Es fällt auf, dass ca. 2/3 der Passagiere männlich waren und ca. 1/3 weiblich.
+# Zudem stellt sich auch hier herraus, die Entropie mit 0.9 schon sehr hoch ist
+# und mit einem Gini-Index nahe 0.5 sind die Geschlechter weder besonders 
+# gleichmäßig noch besonders ungelichmäßig verteilt. 
 
 -------------------------------------------------------------------------------
 
@@ -110,7 +127,7 @@ analyse_kategorial(titanic$Survived, titanic$Deck)
 # gibt es zwar Zusammenhänge, aber nur schwache.
 
 # Nutzung der Funktion aus v
-#visualize_kat(titanic$Pclass, titanic$Embarked, titanic$Title, titanic$Deck)
+# visualize_kat(titanic$Pclass, titanic$Embarked, titanic$Title, titanic$Deck)
 
 # -----------------------------------------------------------------------------
 
