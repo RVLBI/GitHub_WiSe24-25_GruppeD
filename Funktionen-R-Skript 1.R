@@ -298,22 +298,17 @@ visualize_kat <- function(data, var1, var2, var3, var4 = NULL){
       subset_data <- data[data[[var4]] == level, ]
       # Erstellen einer Häufigkeitstabelle für die drei verbleibenden kategorialen Variablen
       counts <- table(subset_data[[var1]], subset_data[[var2]], subset_data[[var3]])
-      barplot(counts, beside = TRUE, legend = TRUE, main = paste(var4, "=", level))
+      counts_matrix <- apply(counts, c(1, 2), sum)  # summiere die 3. Dimension
+      barplot(counts_matrix, beside = TRUE, legend = TRUE, main = paste(var4, "=", level))
     }
     par(mfrow = c(1,1))  # Standardansicht wiederherstellen
-    counts_matrix <- apply(counts, c(1, 2), sum)  # summiere die 3. Dimension
   } 
   else {
     # Drei kategoriale Variablen: Gruppenbalkendiagramm
     counts <- table(data[[var1]], data[[var2]], data[[var3]])
-    barplot(counts, beside = TRUE, legend = TRUE, 
+    counts_matrix <- apply(counts, c(1, 2) , sum)
+    barplot(counts_matrix , beside = TRUE, legend = TRUE, 
             main = paste("Balkendiagramm von", var1, "nach", var2, "und", var3))
   }
 }
-#Beispiel zum Titanic Daten
-
-#titanic_data <- read.csv("titanic.csv")
-#"Pclass", "Sex" und "Survived" als Variablen var1, var2 und var3 eingeben
-#visualize_kat(titanic_data, "Pclass", "Sex", "Survived")
-
 

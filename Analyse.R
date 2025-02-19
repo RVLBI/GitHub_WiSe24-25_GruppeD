@@ -178,6 +178,10 @@ bivariate_stats_md(titanic$Parch, titanic$Sex)
 # Zuletzt analysieren wir den Einfluss, den drei oder vier kategoriale Variablen 
 # aufeinander haben:
 
+visualize_kate(titanic, "Sex", "Survived", "Age")
 #...
+
+visualize_kate(titanic, "Pclass", "Sex", "Survived", "Embarked")
+# ...
 
 # Zusammenfassend kann also gesagt werden, dass...
