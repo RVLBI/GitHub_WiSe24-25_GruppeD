@@ -143,9 +143,6 @@ analyse_kategorial(titanic$Survived, titanic$Deck)
 # das Geschlecht den klarsten Zusammenhang hat. Für das Deck und die Boardseite
 # gibt es zwar Zusammenhänge, aber nur schwache.
 
-# Nutzung der Funktion aus v
-# visualize_kat(titanic$Pclass, titanic$Embarked, titanic$Title, titanic$Deck)
-
 # -----------------------------------------------------------------------------
 
 # Als nächstes gehen wir dem Zusammenspiel von metrischen und dichotomen
@@ -178,10 +175,25 @@ bivariate_stats_md(titanic$Parch, titanic$Sex)
 # Zuletzt analysieren wir den Einfluss, den drei oder vier kategoriale Variablen 
 # aufeinander haben:
 
-visualize_kate(titanic, "Sex", "Survived", "Age")
+visualize_kat(titanic, "Sex", "Survived", "Age")
 #...
 
-visualize_kate(titanic, "Pclass", "Sex", "Survived", "Embarked")
-# ...
+visualize_kat(titanic, "Pclass", "Sex", "Survived", "Embarked")
+# Die Grafik zeigt, dass die Passagiere, die in Queenstown zugestiegen sind, 
+# nahezu alle in PClass 3, also der niedrigsten Klasse untergekommen sind. Zudem
+# wird deutslich, dass proportial die meisten Passagiere in Cherbourg der besten
+# Klasse (PClass = 1) angehören. 
+# Dies könnte der Fall sein, da sich die Passagiere aus Cherbourg mehr leisten
+# können, also mehr für ihr Ticket ausgeben können. 
+# Diese These lässt sich dadurch belegen, wenn die Mittelwerte von Fare an den 
+# einzelnen Einstiegsorte bestimmt werden. 
+Cherbourg <- titanic$Embarked == "Cherbourg"
+Queenstown <- titanic$Embarked == "Queenstown"
+Southhampton <- titanic$Embarked == "Southampton"
+mean(titanic$Fare[Cherbourg], na.rm=TRUE) # 59.95414
+mean(titanic$Fare[Queenstown], na.rm=TRUE) # 13.27603
+mean(titanic$Fare[Southhampton], na.rm=TRUE) # 27.07981
+# Folglich gaben die in Cherbourg zugestiegenen tatsächlich viel mehr für ihre 
+# Tickets aus, also die anderen um in einer bessere Klasse zu "wohnen".
 
 # Zusammenfassend kann also gesagt werden, dass...
