@@ -1,5 +1,6 @@
 # Aufgabe 2a)
 library(vcd) #fuer die Teilaufgabe iii)
+library(ggplot2) #fuer die Teilaufgabe v)
 
 # source("Funktionen-R-Skript 2.R")
 
@@ -309,6 +310,43 @@ visualize_kat <- function(data, var1, var2, var3, var4 = NULL){
     counts_matrix <- apply(counts, c(1, 2) , sum)
     barplot(counts_matrix , beside = TRUE, legend = TRUE, 
             main = paste("Balkendiagramm von", var1, "nach", var2, "und", var3))
+  }
+}
+
+# visualize_kat_alternative - Funktion zur Visualisierung von drei oder vier  
+#                 kategorialen Variablen in einem Balloon-Plot
+#
+# Input: data - Datensatz (Dataframe)
+#        var1 - Name der ersten kategorialen Variable 
+#        var2 - Name der zweiten kategorialen Variable 
+#        var3 - Name der dritten kategorialen Variable
+#        var4 - (Optional) Name der vierten kategorialen Variable 
+#
+# Output: Ein Balloon-Plot mit Gruppierung und Facettierung
+
+visualize_kat_alternative <- function(data, var1, var2, var3, var4 = NULL) {
+  if (!is.null(var4)) {
+    # Erstelle Häufigkeitstabelle für vier Variablen:
+    tbl <- as.data.frame(table(data[[var1]], data[[var2]], data[[var3]], data[[var4]]))
+    colnames(tbl) <- c(var1, var2, var3, var4, "Freq")
+    
+    # Balloon-Plot mithilfe der Häufigkeitstabelle erstellen:
+    ggplot(tbl, aes_string(x = var1, y = var2, size = "Freq", fill = "Freq")) +
+      geom_point(shape = 21, colour = "black") +
+      facet_grid(as.formula(paste(var3, "~", var4))) + # In Teilplots nach dritter und vierter Variable unterteilen 
+      scale_size_continuous(range = c(2, 10)) + # Spannweite für Größe der Punkte
+      ggtitle("Balloon Plot für vier kategoriale Variablen")
+  } else {
+    # Erstelle Häufigkeitstabelle für drei Variablen:
+    tbl <- as.data.frame(table(data[[var1]], data[[var2]], data[[var3]]))     
+    colnames(tbl) <- c(var1, var2, var3, "Freq")          
+    
+    # Balloon-Plot mithilfe der Häufigkeitstabelle erstellen:
+    ggplot(tbl, aes_string(x = var1, y = var2, size = "Freq", fill = "Freq")) +       
+      geom_point(shape = 21, colour = "black") +  
+      facet_wrap(as.formula(paste("~", var3))) +  # In Teilplots nach dritter Variable unterteilen  
+      scale_size_continuous(range = c(2, 10)) +   # Spannweite für Größe der Punkte    
+      ggtitle("Balloon Plot für drei kategoriale Variablen")   
   }
 }
 
