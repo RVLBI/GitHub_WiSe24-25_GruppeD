@@ -187,13 +187,16 @@ visualize_kat(titanic, "Pclass", "Sex", "Survived", "Embarked")
 # können, also mehr für ihr Ticket ausgeben können. 
 # Diese These lässt sich dadurch belegen, wenn die Mittelwerte von Fare an den 
 # einzelnen Einstiegsorte bestimmt werden. 
-Cherbourg <- titanic$Embarked == "Cherbourg"
-Queenstown <- titanic$Embarked == "Queenstown"
-Southhampton <- titanic$Embarked == "Southampton"
-mean(titanic$Fare[Cherbourg], na.rm=TRUE) # 59.95414
-mean(titanic$Fare[Queenstown], na.rm=TRUE) # 13.27603
-mean(titanic$Fare[Southhampton], na.rm=TRUE) # 27.07981
+mittel_bestimmter_auspraegung(titanic$Embarked, titanic$Fare, "Queenstown") # 13.27603
+mittel_bestimmter_auspraegung(titanic$Embarked, titanic$Fare, "Southampton") # 27.07981
+mittel_bestimmter_auspraegung(titanic$Embarked, titanic$Fare, "Cherbourg") # 59.95414
 # Folglich gaben die in Cherbourg zugestiegenen tatsächlich viel mehr für ihre 
-# Tickets aus, also die anderen um in einer bessere Klasse zu "wohnen".
+# Tickets aus, als die anderen, um in einer bessere Klasse zu "wohnen". 
+# Der Preis wird insbesondere durch die höhere Klasse höher. 
+mittel_bestimmter_auspraegung(titanic$Pclass, titanic$Fare, "3") # 13.67555
+mittel_bestimmter_auspraegung(titanic$Pclass, titanic$Fare, "2") # 20.662218
+mittel_bestimmter_auspraegung(titanic$Pclass, titanic$Fare, "1") # 84.15469
+
+# ------------------------------------------------------------------------------------
 
 # Zusammenfassend kann also gesagt werden, dass...

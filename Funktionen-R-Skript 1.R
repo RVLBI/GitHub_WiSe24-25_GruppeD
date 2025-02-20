@@ -312,3 +312,22 @@ visualize_kat <- function(data, var1, var2, var3, var4 = NULL){
   }
 }
 
+
+# iv): 
+# mittel_bestimmter_auspraegung - Funktion zur Bestimmung des Mittelwertes der 
+#                                 metrischen Variable2, bei den Einträgen, die 
+#                                 mit auspraegung1 von variable1 übereinstimmen
+
+# Input: 
+# variable1: eine Variable des Datensatzes
+# variable2: eine metische Variable des Datensatzes
+# auspraegung1: die zu untersuchende Ausprägung von variable1
+
+# Output: 
+# Der Mittelwert von Variable 2 von allen Einträgen, die die gewünscht 
+# Eigenschaft (variable1 = auspraegung) haben.
+
+mittel_bestimmter_auspraegung <- function(variable1, variable2, auspraegung1) {
+  var1 <- variable1 == auspraegung1
+  return(mean(variable2[var1], na.rm = TRUE))
+}
