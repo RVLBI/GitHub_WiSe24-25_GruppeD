@@ -106,6 +106,9 @@ analyse_kategorial(titanic$Embarked, titanic$Sex)
 # Zuerst der Zusammenhang zwischen dem Zustiegshafen und dem Geschlecht: Anhand 
 # der Kreuztabelle sieht man bereits auf den ersten Blick, dass es Unterschiede
 # bei der Geschlechtsverteilung zwischen den Häfen gibt.
+# Am Balkendiagramm sieht man, dass zwar in Queenstown und Cherbourg ähnlich viele 
+# Männer und Frauen eingestiegen sind, in Southampton aber ca. doppelt so viele
+# Männer wie Frauen.
 # Die verschiedenen Koeffizienten deuten alle auf einen schwachen Zusammenhang 
 # hin.
 # Der Chi-Quadrat-Test legt nahe, dass es einen signifikanten Zusammenhang
@@ -116,7 +119,7 @@ analyse_kategorial(titanic$Embarked, titanic$Sex)
 analyse_kategorial(titanic$Survived, titanic$Sex)
 # Mit der Kreuztabelle sieht man direkt, dass der Anteil der Frauen, die 
 # überlebt haben, bei über 50% liegt, während der Anteil der Männer darunter 
-# liegt.
+# liegt. Das sieht man auch am Balkendiagramm.
 # Der Phi-Koeffizient und Yules Q-Koeffizient deuten beude auf einen (negativen) 
 # Zusammenhang hin. Dies wird durch den Chi-Quadrat-Test bestätigt: Der Test ist
 # signifikant (weit unter 0.05). 
@@ -124,6 +127,8 @@ analyse_kategorial(titanic$Survived, titanic$Sex)
 # Person überlebt hat oder nicht.
 
 analyse_kategorial(titanic$Survived, titanic$Side)
+# Das Balkendiagramm zeigt, dass der Anteil der Überlebenden für beide Boardseiten
+# ähnlich ist, von dem Backboard aber ca. doppelt so viele Personen gestorben sind.
 # Bei der Analyse des Zusammenhangs zwischen Boardseite und dem Überleben gibt
 # es laut Chi-Quadrat-Test keinen signifikanten Zusammenhang.
 # Der Lambda-Koeffizient zeigt jedoch einen mittelstarken Zusammenhang.
@@ -133,6 +138,8 @@ analyse_kategorial(titanic$Survived, titanic$Side)
 # keinen signifikanten.
 
 analyse_kategorial(titanic$Survived, titanic$Deck)
+# Man sieht am Balkendiagramm, dass auf Deck A, B und C jeweils mehr Personen
+# gestorben sind als von den anderen Decks, gemessen an den absoluten Häufigkeiten.
 # Im Allgemienen zeigen der Chi-Quadrat-Test, der Fisher-Test, und fast alle
 # Koeffizienten keinen oder nur einen schwachen Zusammenhang.
 # Als einziges fällt der Lambdakoeffizient für die Zeilen aus der Reihe:
