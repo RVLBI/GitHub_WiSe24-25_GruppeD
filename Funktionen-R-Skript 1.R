@@ -1,6 +1,7 @@
 # Aufgabe 2a)
 library(vcd) #fuer die Teilaufgabe iii)
 library(ggplot2) #fuer die Teilaufgabe v)
+library(dplyr) #fuer die Funktion visualize_kat_percentage() aus der Teilaufgabe v)
 
 source("Funktionen-R-Skript 2.R")
 
@@ -364,6 +365,63 @@ visualize_kat_alternative <- function(data, var1, var2, var3, var4 = NULL) {
   }
 }
 
+#visualize_kat_percentage - erstellt einen Balloon-Plot fuer kategoriale Variablen, wobei die Haeufigkeiten
+#in Prozentwerten innerhalb der jeweiligen Gruppen dargestellt werden.Die Funktion erstellt zunächst eine Haeufigkeitstabelle
+#fuer die angegebenen Variablen und wandelt diese in einen Dataframe um.
+#Anschliessend wird innerhalb der Gruppen  der prozentuale Anteil 
+# berechnet. Die Prozentwerte werden dann als Groesse und Fuellfarbe
+#der Punkte im Balloon-Plot genutzt.
+
+#Input:  data -  Ein Dataframe, der die zu analysierenden Daten enthaelt
+#        var1 - Name der ersten kategorialen Variable 
+#        var2 - Name der zweiten kategorialen Variable 
+#        var3 - Name der dritten kategorialen Variable, nach der die Daten gruppiert werden 
+#        var4 - Name der vierten kategorialen Variable für zusätzliche Gruppierung
+#
+#Output: Ein ggplot2-Objekt, das den Balloon-Plot anzeigt. 
+
+#' @details
+
+visualize_kat_percentage <- function(data, var1, var2, var3, var4 = NULL) {
+   # Wenn var4 angegeben ist:
+  if (!is.null(var4)) {
+    tbl <- as.data.frame(table(data[[var1]], data[[var2]], data[[var3]], data[[var4]]))
+    # Haeufigkeitstabelle fuer vier Variablen erstellen und in Dataframe umwandeln.
+    colnames(tbl) <- c(var1, var2, var3, var4, "Freq")
+    
+    tbl <- tbl %>%
+      group_by_at(vars(one_of(c(var3, var4)))) %>%
+      mutate(Percent = Freq / sum(Freq) * 100) %>%
+      ungroup() # Daten nach var3 und var4 gruppieren, Prozentwerte
+                # berechnen und Gruppierung aufheben.
+    
+     # Balloon-Plot erstellen, facet_grid nach var3 und var4.
+    ggplot(tbl, aes_string(x = var1, y = var2, size = "Percent", fill = "Percent")) +
+      geom_point(shape = 21, colour = "black") +
+      facet_grid(as.formula(paste(var3, "~", var4))) +
+      scale_size_continuous(range = c(2, 10)) +
+      ggtitle("Balloon Plot fuer vier kategoriale Variablen (Prozent, gruppiert)")
+   
+    
+  } else {
+    # Wenn drei Variablen angegeben sind:
+    tbl <- as.data.frame(table(data[[var1]], data[[var2]], data[[var3]]))
+    colnames(tbl) <- c(var1, var2, var3, "Freq")  # Haeufigkeitstabelle fuer drei Variablen erstellen.
+    
+    tbl <- tbl %>%
+      group_by_at(vars(one_of(var3))) %>%
+      mutate(Percent = Freq / sum(Freq) * 100) %>%
+      ungroup()    # Daten nach var3 gruppieren, Prozentwerte berechnen und Gruppierung aufheben.
+
+   # Balloon-Plot erstellen, facet_wrap nach var3.
+    ggplot(tbl, aes_string(x = var1, y = var2, size = "Percent", fill = "Percent")) +
+      geom_point(shape = 21, colour = "black") +
+      facet_wrap(as.formula(paste("~", var3))) +
+      scale_size_continuous(range = c(2, 10)) +
+      ggtitle("Balloon Plot fuer drei kategoriale Variablen (Prozent, gruppiert)")
+
+  }
+}
 
 # iv): 
 # mittel_bestimmter_auspraegung - Funktion zur Bestimmung des Mittelwertes der 
