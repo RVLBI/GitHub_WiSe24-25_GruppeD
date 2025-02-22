@@ -221,7 +221,7 @@ analyse_kategorial <- function(var1, var2) {
   opar <- par(mai = c(1,1,1,1), lwd = 2, cex = 1.4, las = 1)
   plot.new()
   x <- table(var1, var2)
-  barplot(x, legend =TRUE, args.legend = list(x = "topleft", horiz = FALSE, cex = 0.65))
+  barplot(x, legend =TRUE, args.legend = list(x = "topright", horiz = FALSE, cex = 0.65))
   par(opar)
 }
 

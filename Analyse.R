@@ -1,4 +1,4 @@
-# setwd("/Users/mikadirkes/Github-Projekt/")
+print(setwd(dirname(rstudioapi::getSourceEditorContext()$path)))
 
 titanic <- read.csv("processed_titanic.csv")
 
@@ -103,6 +103,7 @@ deskriptive_statistiken_kategorial(titanic$Sex)
 # ein Spezialfall von kategorialen Variablen sind:
 
 analyse_kategorial(titanic$Embarked, titanic$Sex)
+title(main = "Zustiegshafen, geteilt in Männer und Frauen")
 # Zuerst der Zusammenhang zwischen dem Zustiegshafen und dem Geschlecht: Anhand 
 # der Kreuztabelle sieht man bereits auf den ersten Blick, dass es Unterschiede
 # bei der Geschlechtsverteilung zwischen den Häfen gibt.
@@ -117,6 +118,7 @@ analyse_kategorial(titanic$Embarked, titanic$Sex)
 # beiden Variablen gibt.
 
 analyse_kategorial(titanic$Survived, titanic$Sex)
+title(main = "Überleben, geteilt in Männer/Frauen")
 # Mit der Kreuztabelle sieht man direkt, dass der Anteil der Frauen, die 
 # überlebt haben, bei über 50% liegt, während der Anteil der Männer darunter 
 # liegt. Das sieht man auch am Balkendiagramm.
@@ -127,6 +129,7 @@ analyse_kategorial(titanic$Survived, titanic$Sex)
 # Person überlebt hat oder nicht.
 
 analyse_kategorial(titanic$Survived, titanic$Side)
+title(main = "Überleben, geteilt in Back-/Steuerboard")
 # Das Balkendiagramm zeigt, dass der Anteil der Überlebenden für beide Boardseiten
 # ähnlich ist, von dem Backboard aber ca. doppelt so viele Personen gestorben sind.
 # Bei der Analyse des Zusammenhangs zwischen Boardseite und dem Überleben gibt
@@ -138,6 +141,7 @@ analyse_kategorial(titanic$Survived, titanic$Side)
 # keinen signifikanten.
 
 analyse_kategorial(titanic$Survived, titanic$Deck)
+title(main = "Überleben, geteilt in das jeweilige Deck der Person")
 # Man sieht am Balkendiagramm, dass auf Deck A, B und C jeweils mehr Personen
 # gestorben sind als von den anderen Decks, gemessen an den absoluten Häufigkeiten.
 # Im Allgemienen zeigen der Chi-Quadrat-Test, der Fisher-Test, und fast alle
@@ -182,6 +186,7 @@ bivariate_stats_md(titanic$Parch, titanic$Sex)
 # Zuletzt analysieren wir den Einfluss, den drei oder vier kategoriale Variablen 
 # aufeinander haben:
 
+dev.off()
 visualize_kat(titanic, "Pclass", "Sex", "Survived", "Embarked")
 # Die Grafik zeigt, dass die Passagiere, die in Queenstown zugestiegen sind, 
 # nahezu alle in PClass 3, also der niedrigsten Klasse untergekommen sind. Zudem
@@ -201,13 +206,17 @@ mittel_bestimmter_auspraegung(titanic$Pclass, titanic$Fare, "3") # 13.67555
 mittel_bestimmter_auspraegung(titanic$Pclass, titanic$Fare, "2") # 20.662218
 mittel_bestimmter_auspraegung(titanic$Pclass, titanic$Fare, "1") # 84.15469
 
+dev.off()
 visualize_kat_alternative(titanic, "Survived", "Pclass", "Embarked")
 # Der Plot zeigt, dass es keine großen Unterschiede zwischen den Klassen und 
 # Einstiegsorten bezüglich des Überlebens gibt, 
 
+dev.off()
 visualize_kat_alternative(titanic, "Survived", "Embarked", "Sex")
 # Nimmt man das Geschelcht hinzu, so erkennt man, dass mehr Frauen, die in 
 # Southampton zugestiegen sind überlebt haben als Männer.
+# Allgemein sieht man hier auch gut, dass mehr Frauen aus den jeweiligen 
+# Zustiegshafen überlebt haben, als gestorben sind.
 
 # ------------------------------------------------------------------------------------
 
