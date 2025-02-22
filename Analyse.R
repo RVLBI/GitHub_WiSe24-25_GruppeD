@@ -224,4 +224,8 @@ visualize_kat_alternative(titanic, "Survived", "Embarked", "Sex")
 
 # ------------------------------------------------------------------------------------
 
-# Zusammenfassend kann also gesagt werden, dass...
+# Zusammenfassend kann gesagt werden, dass der Datensatz keinesfalls nur aus 
+# zufälligen und unabhängigen Ausprägungen besteht, sondern ein starkes Zusammenspiel 
+# zwischen den verschiedenen Variablen stattfand. Die Analyse verdeutlicht also unter 
+# anderem, dass die sozialen Umstände der Fahrgäste ihr Schicksal maßgeblich beeinflusst 
+# haben. 
