@@ -380,7 +380,6 @@ visualize_kat_alternative <- function(data, var1, var2, var3, var4 = NULL) {
 #
 #Output: Ein ggplot2-Objekt, das den Balloon-Plot anzeigt. 
 
-#' @details
 
 visualize_kat_percentage <- function(data, var1, var2, var3, var4 = NULL) {
    # Wenn var4 angegeben ist:
