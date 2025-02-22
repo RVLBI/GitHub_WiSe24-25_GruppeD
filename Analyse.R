@@ -190,7 +190,8 @@ bivariate_stats_md(titanic$Parch, titanic$Sex)
 # Zuletzt analysieren wir den Einfluss, den drei oder vier kategoriale Variablen 
 # aufeinander haben:
 
-visualize_kat(titanic, "Pclass", "Sex", "Survived", "Embarked")
+titanic_clean <- titanic[!is.na(titanic$Embarked) & titanic$Embarked != "", ]
+visualize_kat(titanic_clean, "Pclass", "Sex", "Survived", "Embarked")
 # Die Grafik zeigt, dass die Passagiere, die in Queenstown zugestiegen sind, 
 # nahezu alle in PClass 3, also der niedrigsten Klasse untergekommen sind. Zudem
 # wird deutslich, dass proportial die meisten Passagiere in Cherbourg der besten
