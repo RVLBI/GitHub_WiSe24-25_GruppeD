@@ -212,7 +212,11 @@ mittel_bestimmter_auspraegung(titanic$Pclass, titanic$Fare, "1") # 84.15469
 
 visualize_kat_alternative(titanic, "Survived", "Pclass", "Embarked")
 # Der Plot zeigt, dass es keine großen Unterschiede zwischen den Klassen und 
-# Einstiegsorten bezüglich des Überlebens gibt, 
+# Einstiegsorten bezüglich des Überlebens gibt. Nur ist Southampton überlebten
+# scheinbar übermäßig viele Passagiere der dritten Klasse nicht. Dies sieht
+# überdimensional viel aus, da in Southampton auch viel mehr Passagiere einstiegen
+# als an den anderen Standorten, an denen auch mehr Menschen mit Klasse 3 starben 
+# als überlebten.
 
 visualize_kat_alternative(titanic, "Survived", "Embarked", "Sex")
 # Nimmt man das Geschelcht hinzu, so erkennt man, dass mehr Frauen, die in 
