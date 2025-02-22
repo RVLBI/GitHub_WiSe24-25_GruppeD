@@ -24,7 +24,7 @@ titanic$Embarked <- factor(titanic$Embarked, levels = c("C", "Q", "S"),
                            labels = c("Cherbourg", "Queenstown", "Southampton"))
 
 # Kodierung von "PClass" als ordered-factor:
-titanic$Pclass <- factor(titanic$Pclass, ordered = TRUE, levels = c(1, 2, 3))
+titanic$Pclass <- factor(titanic$Pclass, ordered = TRUE, levels = c(3, 2, 1))
 
 # Altersangeben: nicht angegebene durch den Median, der Gruppe mit derselben Anrede ersetzen 
 impute_age <- function(title, age) {                                         # neue Funktion mit Parameter Titel (Anrede) und Alter erstellen
