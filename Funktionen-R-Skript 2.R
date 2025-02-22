@@ -1,3 +1,5 @@
+# Aufgabe 2b)
+
 install.packages("ggplot2")
 
 # Hilfsfunktion zum Berechen des Modus: 
@@ -40,5 +42,11 @@ woelbungfkt <- function(variable, qd) {
   Q1 <- quantile(variable, probs = 0.1, names = F, na.rm = T)
   ergebnis <- 0.5 * (qd/(Q9-Q1))
   return(ergebnis)
+}
+
+
+# Prueft, ob die Kreuztabelle eine 2x2 Matrix ist
+ist_2x2 <- function(tabelle) {
+  return(nrow(tabelle) == 2 & ncol(tabelle) == 2)
 }
   

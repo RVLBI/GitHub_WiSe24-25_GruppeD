@@ -2,7 +2,7 @@
 library(vcd) #fuer die Teilaufgabe iii)
 library(ggplot2) #fuer die Teilaufgabe v)
 
-# source("Funktionen-R-Skript 2.R")
+source("Funktionen-R-Skript 2.R")
 
 # i:
 # deskript_stat_metr: 
@@ -141,11 +141,6 @@ deskriptive_statistiken_kategorial <- function(variable) {
 
 
 # iii: Analyse der Beziehung zwischen zwei kategorialen Variablen
-
-ist_2x2 <- function(tabelle) {
-  return(nrow(tabelle) == 2 & ncol(tabelle) == 2)
-} # Prueft, ob die Kreuztabelle eine 2x2 Matrix ist
-
 # analyse_kategorial - fuehrt eine detaillierte Analyse der 
 # Beziehung zwischen zwei kategorialen Variablen durch
 # und berechnet geeignete statistische Koeffizienten, 
