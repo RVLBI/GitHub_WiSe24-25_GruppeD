@@ -77,6 +77,10 @@ deskriptive_statistiken_kategorial(titanic$Deck)
 # rund fünf Sechsteln der Gäste Unterschlupf, während nur ein Sechstel auf 
 # einem der anderen vier Decks übernachtete.
 
+# Pclass wie in der Vorbereitung zur Analyse in einen Faktor umschreiben, da 
+# Pclass sonst als numeric gewertet wird, weil die csv nicht mit speichert, ob
+# eine Variable mit Zahlen ordinal (Faktor) ist oder tatsächlich die Zahl. 
+titanic$Pclass <- factor(titanic$Pclass, ordered = TRUE, levels = c(3, 2, 1))
 deskriptive_statistiken_kategorial(titanic$Pclass)
 # Außerdem war die am meisten genutzte Klasse scheinbar die dritte - sie
 # kommt auf mehr Buchende als die ersten beiden Klassen zusammen. 
