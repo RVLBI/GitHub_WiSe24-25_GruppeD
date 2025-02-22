@@ -1,5 +1,6 @@
-# setwd("C:/Users/tikva/Desktop")
-
+# lade die alte titanic.csv-Datei:
+install.packages("rstudioapi")
+print(setwd(dirname(rstudioapi::getSourceEditorContext()$path)))
 titanic <- read.csv("titanic.csv", stringsAsFactors = FALSE)
 
 # Trennen der Anreden von den Namen: 
@@ -54,6 +55,5 @@ titanic <- titanic[, !(names(titanic) %in%
                          c("PassengerId", "Name", "Ticket", "Cabin"))]
 
 # Update für die csv-Datei
-#setwd("C:/Users/vivie/OneDrive/Dokumente/GitHub/GitHub_WiSe25-25_GruppeD")  # setze Pfad
 write.csv(titanic, "processed_titanic.csv", row.names = FALSE)               # abspeichern
 
