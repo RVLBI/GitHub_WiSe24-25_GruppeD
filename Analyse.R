@@ -190,7 +190,6 @@ bivariate_stats_md(titanic$Parch, titanic$Sex)
 # Zuletzt analysieren wir den Einfluss, den drei oder vier kategoriale Variablen 
 # aufeinander haben:
 
-dev.off()
 visualize_kat(titanic, "Pclass", "Sex", "Survived", "Embarked")
 # Die Grafik zeigt, dass die Passagiere, die in Queenstown zugestiegen sind, 
 # nahezu alle in PClass 3, also der niedrigsten Klasse untergekommen sind. Zudem
@@ -210,12 +209,10 @@ mittel_bestimmter_auspraegung(titanic$Pclass, titanic$Fare, "3") # 13.67555
 mittel_bestimmter_auspraegung(titanic$Pclass, titanic$Fare, "2") # 20.662218
 mittel_bestimmter_auspraegung(titanic$Pclass, titanic$Fare, "1") # 84.15469
 
-dev.off()
 visualize_kat_alternative(titanic, "Survived", "Pclass", "Embarked")
 # Der Plot zeigt, dass es keine großen Unterschiede zwischen den Klassen und 
 # Einstiegsorten bezüglich des Überlebens gibt, 
 
-dev.off()
 visualize_kat_alternative(titanic, "Survived", "Embarked", "Sex")
 # Nimmt man das Geschelcht hinzu, so erkennt man, dass mehr Frauen, die in 
 # Southampton zugestiegen sind überlebt haben als Männer.

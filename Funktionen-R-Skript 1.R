@@ -59,6 +59,8 @@ deskript_stat_metr <- function(variable){
   woelbung <- woelbungfkt(variable, qd)
   
   # Boxplot ausgeben:
+  plot.new()
+  dev.off()
   name <- deparse(substitute(variable)) # bestimmen Namen der Variable
   name <- tail(strsplit(name, "\\$")[[1]], 1) # entferne titanic$
   boxplot(variable, xlab = name)
@@ -123,6 +125,8 @@ deskriptive_statistiken_kategorial <- function(variable) {
   gini_index <- 1 - sum(relhaeufigkeiten^2)
   
   # Balkendiagramm zu den Häufigkeiten erstellen
+  plot.new()
+  dev.off()
   Balkendiagramm_kathegorial(variable)
   
   # Ergebnisse ausgeben
@@ -218,8 +222,9 @@ analyse_kategorial <- function(var1, var2) {
   }
 
   # Ausgabe als gestapeltes Balkendiagramm mit Legende:
-  opar <- par(mai = c(1,1,1,1), lwd = 2, cex = 1.4, las = 1)
   plot.new()
+  dev.off()
+  opar <- par(mai = c(1,1,1,1), lwd = 2, cex = 1.4, las = 1)
   x <- table(var1, var2)
   barplot(x, legend =TRUE, args.legend = list(x = "topright", horiz = FALSE, cex = 0.65))
   par(opar)
@@ -249,6 +254,8 @@ bivariate_stats_md <- function(metric_var, dichotom_var) {
 
   # Boxplots für die metrische Variable bei den beiden Ausprägungen der 
   # dichotomen Variable: 
+  plot.new()
+  dev.off()
   boxplot(metric_var ~ dichotom_var, 
           main = "Boxplots je nach Ausprägung der dichotomen Variable")
 
@@ -291,6 +298,8 @@ bivariate_stats_md <- function(metric_var, dichotom_var) {
 # Output: Ein Balkendiagramm mit Gruppierung und Facettierung
 
 visualize_kat <- function(data, var1, var2, var3, var4 = NULL){
+  plot.new()
+  dev.off()
   # Überprüfen, ob eine vierte kategoriale Variable angegeben wurde
   if (!is.null(var4)) {
   # Vier kategoriale Variablen: Mehrere Facetten
@@ -327,13 +336,16 @@ visualize_kat <- function(data, var1, var2, var3, var4 = NULL){
 # Output: Ein Balloon-Plot mit Gruppierung und Facettierung
 
 visualize_kat_alternative <- function(data, var1, var2, var3, var4 = NULL) {
+  plot.new()
+  dev.off()
+  library("ggplot2")
   if (!is.null(var4)) {
     # Erstelle Häufigkeitstabelle für vier Variablen:
     tbl <- as.data.frame(table(data[[var1]], data[[var2]], data[[var3]], data[[var4]]))
     colnames(tbl) <- c(var1, var2, var3, var4, "Freq")
     
     # Balloon-Plot mithilfe der Häufigkeitstabelle erstellen:
-    ggplot(tbl, aes_string(x = var1, y = var2, size = "Freq", fill = "Freq")) +
+    ggplot(tbl, aes(x = var1, y = var2, size = "Freq", fill = "Freq")) +
       geom_point(shape = 21, colour = "black") +
       facet_grid(as.formula(paste(var3, "~", var4))) + # In Teilplots nach dritter und vierter Variable unterteilen 
       scale_size_continuous(range = c(2, 10)) + # Spannweite für Größe der Punkte
