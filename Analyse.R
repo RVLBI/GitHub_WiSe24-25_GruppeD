@@ -226,3 +226,19 @@ visualize_kat_alternative(titanic, "Survived", "Embarked", "Sex")
 # zwischen den verschiedenen Variablen stattfand. Die Analyse verdeutlicht also unter 
 # anderem, dass die sozialen Umstände der Fahrgäste ihr Schicksal maßgeblich beeinflusst 
 # haben. 
+
+visualize_kat_percentage(titanic, "Survived", "Pclass", "Embarked")
+# In Cherbourg war die Verteilung zwischen Ueberlebenden und Verstorbenen 
+# relativ ausgewogen. In allen Klassen ueberlebten und starben ungefaehr 
+# gleich viele Passagiere, mit einer Ausnahme: In der ersten Klasse gab es
+# deutlich mehr Ueberlebende als Todesopfer.
+# In Queenstown reisten die meisten Passagiere in der dritten Klasse.
+# Leider endete die Reise fuer die Mehrheit von ihnen toedlich –
+# nur ein kleiner Teil konnte gerettet werden.
+# In Southampton war die Verteilung der Passagiere vielfaeltiger. 
+# Etwa gleich viele Menschen reisten in der ersten und zweiten Klasse, 
+# waehrend die Mehrheit in der dritten Klasse unterwegs war. 
+# Besonders auffaellig ist hier, dass in der dritten Klasse die 
+# meisten Todesfaelle zu verzeichnen sind. Gleichzeitig ueberlebte
+# in allen drei Klassen eine aehnliche Anzahl von Passagieren, wenn
+# auch insgesamt weniger als die Zahl der Verstorbenen.
