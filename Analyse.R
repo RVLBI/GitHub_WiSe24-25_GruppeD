@@ -220,14 +220,6 @@ visualize_kat_alternative(titanic, "Survived", "Embarked", "Sex")
 # Allgemein sieht man hier auch gut, dass mehr Frauen aus den jeweiligen 
 # Zustiegshafen überlebt haben, als gestorben sind.
 
-# ------------------------------------------------------------------------------------
-
-# Zusammenfassend kann gesagt werden, dass der Datensatz keinesfalls nur aus 
-# zufälligen und unabhängigen Ausprägungen besteht, sondern ein starkes Zusammenspiel 
-# zwischen den verschiedenen Variablen stattfand. Die Analyse verdeutlicht also unter 
-# anderem, dass die sozialen Umstände der Fahrgäste ihr Schicksal maßgeblich beeinflusst 
-# haben. 
-
 visualize_kat_percentage(titanic, "Survived", "Pclass", "Embarked")
 # In Cherbourg war die Verteilung zwischen Ueberlebenden und Verstorbenen 
 # relativ ausgewogen. In allen Klassen ueberlebten und starben ungefaehr 
@@ -243,3 +235,13 @@ visualize_kat_percentage(titanic, "Survived", "Pclass", "Embarked")
 # meisten Todesfaelle zu verzeichnen sind. Gleichzeitig ueberlebte
 # in allen drei Klassen eine aehnliche Anzahl von Passagieren, wenn
 # auch insgesamt weniger als die Zahl der Verstorbenen.
+
+
+# ------------------------------------------------------------------------------------
+
+# Zusammenfassend kann gesagt werden, dass der Datensatz keinesfalls nur aus 
+# zufälligen und unabhängigen Ausprägungen besteht, sondern ein starkes Zusammenspiel 
+# zwischen den verschiedenen Variablen stattfand. Die Analyse verdeutlicht also unter 
+# anderem, dass die sozialen Umstände der Fahrgäste ihr Schicksal maßgeblich beeinflusst 
+# haben. 
+
