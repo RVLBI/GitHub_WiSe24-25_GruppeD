@@ -8,3 +8,5 @@ Die Beareitung der Aufgaben befindet sich in den Dateien:
 1) Vorbereitung Analyse.R (inklusive processed_titanic.csv)
 2) Funktionen-R-Skript 1.R und Funktionen-R-Skript 2.R
 4) Analyse.R
+
+Die Diskussion der Ergebnisse haben wir über die Issues durchgeführt.
