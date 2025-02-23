@@ -247,5 +247,6 @@ visualize_kat_percentage(titanic, "Survived", "Pclass", "Embarked")
 # zufälligen und unabhängigen Ausprägungen besteht, sondern ein starkes Zusammenspiel 
 # zwischen den verschiedenen Variablen stattfand. Die Analyse verdeutlicht also unter 
 # anderem, dass die sozialen Umstände der Fahrgäste ihr Schicksal maßgeblich beeinflusst 
-# haben. 
+# haben. So hatten zum Beispiel Passagiere mit höheren Ticketpreisen, Reisende der  
+# ersten Klasse und Frauen höhere Überlebenschancen als die restlichen Menschen an Bord. 
 
